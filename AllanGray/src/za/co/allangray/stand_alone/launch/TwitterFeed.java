@@ -96,7 +96,45 @@ public class TwitterFeed {
 					userFollowersMap.put(getUsername(users), getFollowers(users));
 				}
 			}
-			userFollowersMap.put("Martin", new ArrayList<String>());
+			// determine whether a user is following other users.
+			isUserFollowingOtherUsers(twitterUsrs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Determines if the user being followed, follows anyone.
+	 * 
+	 * @param twitterUsrs
+	 */
+	private static void isUserFollowingOtherUsers(List<String> twitterUsrs) {
+
+		StringBuilder sb = null;
+		List<String> listOfUsers = null;
+		try {
+			sb = new StringBuilder();
+			listOfUsers = new ArrayList<String>();
+			sb.append(twitterUsrs.toString());
+			
+			for (String user : twitterUsrs) {
+				user = user.replace(resourceUtils.getFollows(), resourceUtils.getEmptyString());
+				user = user.substring(user.indexOf(resourceUtils.getSpace()), user.length()).trim();
+				
+				if (user.contains(resourceUtils.getComma())) {
+					listOfUsers = Arrays.asList(user.trim().split(resourceUtils.getComma()));
+					for (String uName : listOfUsers) {
+						if (!(sb.toString().contains(uName + resourceUtils.getSpace() + resourceUtils.getFollows()))) {
+							userFollowersMap.put(uName.trim(), new ArrayList<String>());
+						}
+					}
+				} else {
+					if (!(sb.toString().contains(user + resourceUtils.getSpace() + resourceUtils.getFollows()))) {
+						userFollowersMap.put(user, new ArrayList<String>());
+					}
+				}
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,7 +154,7 @@ public class TwitterFeed {
 			for (Entry<String, List<String>> entry : userFollowersMap.entrySet()) {
 				String username = entry.getKey();
 				List<String> followers = entry.getValue();
-				
+
 				displayUserFeed(username, followers);
 			}
 		} catch (Exception e) {

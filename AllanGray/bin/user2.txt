@@ -1,0 +1,8 @@
+Ward follows Alan
+Alan follows Martin, Lawrence, Tefo
+Ward follows Martin, Alan, Lawrence
+Lawrence follows Martin, Alan, Ward, Tefo
+Tefo follows Lawrence
+Spokazi follows Junior
+Lebo follows Wallet
+Wallet follows Lebo, Junior, Spokazi

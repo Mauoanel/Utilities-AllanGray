@@ -12,8 +12,8 @@ import java.nio.charset.StandardCharsets;
  */
 public class ResourceUtils {
 
-	private static final String TWEET_FILE = "src/tweet.txt";
-	private static final String USERS = "src/user.txt";
+	private static final String TWEET_FILE = "src/tweet2.txt";
+	private static final String USERS = "src/user2.txt";
 	private static final Charset ENCODING = StandardCharsets.UTF_8;
 	private static final String EMPTY_STRING = "";
 	private static final String SPACE = " ";
